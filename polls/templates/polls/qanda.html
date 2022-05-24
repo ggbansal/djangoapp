@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>Questions & Choices</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+</head>
+
+<body>
+    <section class="section pb-2">
+        <h1 class="title">
+            Your Opinion Matters
+        </h1>
+        <h2 class="subtitle">
+            Top issues from this week!
+        </h2>
+    </section>
+
+    <section class="section">
+        <div class="columns  is-multiline">
+
+        {% for q in questions %}
+        <div class="column is-two-thirds">
+            <div class="box has-background-primary">
+                <h1 class="subtitle is-size-4"><a  href="recipe?id={{q.id}}">{{q.question_text}}</a></h1>
+                <form action="{% url 'polls:vote' q.id %}" method="post">
+                    {% csrf_token %} 
+                            {% for c in q.choice_set.all %}
+                            <div class="field">
+                                <div class="control">
+                                    <label class="checkbox">
+                                        <input type="checkbox" class="block is-size-5 has-text-white" name="choice"  value="{{c.id}}">
+                                        {{c.choice_text}}
+                                    </label>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-link" type="submit" value="Vote">
+                                    Vote
+                                </button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+            
+        </div>
+        <div class="column is-one-third"></div>
+        {% endfor %}
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Update your Profile</title>
+</head>
+
+<body>
+    <section class="section">
+        <h1 class="title">Tell us about yourself</h1>    
+    </section>
+
+    <section class="section">
+        <h1 class="subtitle">Trying dropdox</h1>
+        <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Dropdown button</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a href="#" class="dropdown-item">
+                  Dropdown item
+                </a>
+                <a class="dropdown-item">
+                  Other dropdown item
+                </a>
+                <a href="#" class="dropdown-item is-active">
+                  Active dropdown item
+                </a>
+                <a href="#" class="dropdown-item">
+                  Other dropdown item
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                  With a divider
+                </a>
+              </div>
+            </div>
+          </div>
+    </section>    
+
+    <section class="section">
+        <form class="box has has-background-link-light" action="{% url 'polls:createprofile' %}" method="post">
+            {% csrf_token %} 
+            <!-- <div class="columns is-multiline"> -->
+                <div class="column is-half">
+                    <div class="notification is-primary">
+                        <h2 class="subtitle is-size-4">Login details</h2>
+                        <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="text" placeholder="yeah" name="username" value="username">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-user"></i>
+                              </span>
+                            </div>
+                        </div>
+                        <!-- password field -->
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control has-icons-left">
+                              <input class="input" type="password" name="password" placeholder="Text input" value="password">
+                              <span class="icon is-small is-left">
+                                <i class="fas fa-unlock"></i>
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+
+                    <div class="notification is-primary">
+                        <h2 class="subtitle is-size-4">Your areas of interest</h2>
+                        <div class="field">
+                            <div class="control">
+                                {% for i in interests %}
+                                    <label class="label">
+                                        <input class="checkbox" type="checkbox" name="my_interests" id="id{{i.name}}" value="{{i.name}}">
+                                        {{i.name}}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-half">
+
+                    <div class="notification is-primary">
+                    <h2 class="subtitle is-size-4">Areas you'd like to be a mentor in</h2>
+                    <div class="field">
+                        <div class="control">
+                            {% for i in interests %}
+                                <label class="label">
+                                    <input class="checkbox" type="checkbox" name="will_mentor" id="id{{i.name}}" value="{{i.name}}">
+                                    {{i.name}}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="column"><button class="button is-link is-centered">Submit</button></div>
+                
+        </form>
+    </section>
+    
+</body>
+</html>

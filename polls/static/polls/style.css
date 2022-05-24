@@ -1,0 +1,13 @@
+p {
+    color:lightgrey;
+    font-size: 20px;
+}
+
+.heading {
+    font-variant: small-caps;
+}
+
+h1, h2, h3 heading {
+    font-weight: bold;
+}
+
